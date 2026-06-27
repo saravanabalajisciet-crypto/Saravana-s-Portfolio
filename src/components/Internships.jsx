@@ -11,6 +11,7 @@ const internships = [
     border: 'border-indigo-500/25',
     bg: 'bg-indigo-500/10',
     dot: 'bg-indigo-400',
+    completedLabel: 'Completed 2024',
     description: 'Completed a web development internship focused on building responsive web applications using React and integrating backend APIs following industry workflow practices.',
     learnings: [
       'Built responsive web applications',
@@ -28,6 +29,7 @@ const internships = [
     border: 'border-purple-500/25',
     bg: 'bg-purple-500/10',
     dot: 'bg-purple-400',
+    completedLabel: 'Completed 2024',
     description: 'Frontend-focused internship building responsive interfaces and reusable UI components, with an emphasis on performance and cross-device compatibility.',
     learnings: [
       'Frontend development with HTML/CSS/JS',
@@ -39,12 +41,12 @@ const internships = [
   {
     company: 'NUX Software Solution',
     role: 'Cloud Computing Intern',
-    duration: 'Jun 2025 – Present · Ongoing',
+    duration: 'Jun 2025 – Aug 2025 · 3 months',
     location: 'Coimbatore, Tamil Nadu',
     color: 'text-cyan-400',
     border: 'border-cyan-500/25',
     bg: 'bg-cyan-500/10',
-    ongoing: true,
+    completedLabel: 'Completed 2025',
     description: 'Practical cloud computing exposure at a Coimbatore-based software firm — provisioning and managing AWS services, deploying applications, and learning cloud architecture fundamentals.',
     learnings: [
       'AWS EC2 and S3 configuration',
@@ -52,6 +54,24 @@ const internships = [
       'Cloud application deployment',
       'Cloud architecture fundamentals',
     ],
+  },
+  {
+    company: 'Bold Business Analytics',
+    role: 'Data Analytics Intern',
+    duration: '2025 · Completed',
+    location: 'Remote',
+    color: 'text-emerald-400',
+    border: 'border-emerald-500/25',
+    bg: 'bg-emerald-500/10',
+    completedLabel: 'Completed 2025',
+    description: 'Data analytics internship focused on SQL-based analysis, Power BI dashboard development, and deriving actionable business insights from raw datasets.',
+    learnings: [
+      'Completed SQL Capstone Project',
+      'Built interactive Power BI dashboards',
+      'Performed data cleaning and business analysis',
+      'Generated insights using SQL and Power BI',
+    ],
+    skills: ['SQL', 'Power BI', 'Data Analysis'],
   },
 ]
 
@@ -86,13 +106,13 @@ export default function Internships() {
           </h2>
           <div className="w-14 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mx-auto mb-5" />
           <p className="text-slate-500 max-w-xl mx-auto text-sm">
-            Industry Experience in Web Development and Cloud Computing
+            Industry Experience in Web Development, Cloud Computing, and Data Analytics
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {internships.map(({ company, role, duration, location, color, border, bg, ongoing, description, learnings }, i) => (
+        {/* Cards — 2 columns on large screens for 4 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {internships.map(({ company, role, duration, location, color, border, bg, completedLabel, description, learnings, skills }, i) => (
             <div
               key={company}
               className={`glass rounded-2xl p-6 border ${border} hover:-translate-y-1 hover:border-white/18 transition-all duration-300 flex flex-col ${
@@ -105,16 +125,10 @@ export default function Internships() {
                 <div className={`w-11 h-11 rounded-xl ${bg} border ${border} flex items-center justify-center`}>
                   <Briefcase size={19} className={color} />
                 </div>
-                {ongoing ? (
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-emerald-400 text-xs font-medium">Ongoing</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/4 border border-white/8">
-                    <span className="text-slate-500 text-xs">✓ Completed 2024</span>
-                  </div>
-                )}
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/4 border border-white/8">
+                  <CheckCircle2 size={12} className="text-slate-400" />
+                  <span className="text-slate-400 text-xs">✓ {completedLabel}</span>
+                </div>
               </div>
 
               <h3 className="text-white font-bold text-lg mb-0.5">{company}</h3>
@@ -128,7 +142,7 @@ export default function Internships() {
 
               <div className="mt-auto">
                 <p className="text-slate-600 text-xs uppercase tracking-wider mb-2.5">Key Work</p>
-                <ul className="space-y-1.5">
+                <ul className="space-y-1.5 mb-4">
                   {learnings.map(item => (
                     <li key={item} className="flex items-start gap-2">
                       <CheckCircle2 size={13} className={`${color} mt-0.5 flex-shrink-0`} />
@@ -136,6 +150,20 @@ export default function Internships() {
                     </li>
                   ))}
                 </ul>
+
+                {/* Skills tags (only shown if defined) */}
+                {skills && (
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {skills.map(skill => (
+                      <span
+                        key={skill}
+                        className={`px-2.5 py-1 rounded-lg border ${border} ${bg} ${color} text-xs font-medium`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -143,7 +171,7 @@ export default function Internships() {
 
         <div className={`mt-8 text-center transition-all duration-700 delay-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-slate-600 text-sm">
-            2 Completed Internships + 1 Ongoing Internship ·{' '}
+            4 Completed Internships ·{' '}
             <a href="https://www.linkedin.com/in/saravana-balaji-s-129a82350" target="_blank" rel="noopener noreferrer"
               className="text-indigo-400 hover:underline">
               View on LinkedIn ↗

@@ -5,7 +5,7 @@ import certImg from '../assets/photos/certificate.jpg'
 const stats = [
   { icon: Award,    value: '2nd',   label: 'MLH Gemini Hack', color: 'text-yellow-400' },
   { icon: Target,   value: 'Top 8', label: 'AlgoMentor AI',   color: 'text-orange-400' },
-  { icon: Briefcase,value: '3',     label: 'Internships',     color: 'text-indigo-400' },
+  { icon: Briefcase,value: '4',     label: 'Internships',     color: 'text-indigo-400' },
 ]
 
 const achievements = [
@@ -40,11 +40,11 @@ const achievements = [
     color: 'text-emerald-400',
     bg: 'bg-emerald-500/10',
     border: 'border-emerald-500/25',
-    badge: '2 Completed + 1 Ongoing',
+    badge: '4 Completed',
     badgeStyle: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-    title: '3 Industry Internships',
-    subtitle: '2 Completed · 1 Ongoing · Web Dev & Cloud',
-    description: 'Completed internships in Web Development and Cloud Computing, gaining practical industry exposure across frontend development, backend integration, and AWS cloud technologies.',
+    title: '4 Industry Internships',
+    subtitle: '4 Completed · Web Dev, Cloud & Data Analytics',
+    description: 'Completed internships in Web Development, Cloud Computing, and Data Analytics — gaining practical industry exposure across frontend development, AWS cloud technologies, SQL, and Power BI.',
     highlight: false,
     hasCert: false,
   },

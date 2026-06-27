@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowDown, GitBranch, Link, Mail, Sparkles, Terminal, Download } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const roles = [
   'Full Stack Developer',
-  'Cloud Computing Enthusiast',
-  'AI & Data Analytics Explorer',
+  'Aspiring Software Engineer',
+  'Data Analytics Enthusiast',
+  'AI & Cloud Explorer',
   'Hackathon Participant',
 ]
 
@@ -13,6 +15,8 @@ export default function Hero() {
   const [displayed, setDisplayed] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const timeoutRef = useRef(null)
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   useEffect(() => {
     const current = roles[roleIndex]
@@ -32,8 +36,13 @@ export default function Hero() {
   const scrollTo = id => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
-      {/* Orbs */}
+    <section
+      id="hero"
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden grid-bg ${
+        isDark ? '' : 'grid-bg-light'
+      }`}
+    >
+      {/* Background orbs */}
       <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-indigo-600/8 blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-72 h-72 rounded-full bg-purple-600/8 blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-cyan-600/3 blur-3xl pointer-events-none" />
@@ -41,20 +50,20 @@ export default function Hero() {
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-28 text-center">
 
         {/* Role badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-indigo-500/25 text-sm text-indigo-300 mb-7 animate-fade-in-up">
+        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-indigo-500/25 text-sm mb-7 animate-fade-in-up ${isDark ? 'text-indigo-300' : 'text-indigo-600'}`}>
           <Sparkles size={13} className="text-indigo-400" />
           <span>Computer Science Engineering Student</span>
         </div>
 
         {/* Name */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-3 animate-fade-in-up delay-100 leading-tight">
-          <span className="text-white">Saravana</span>{' '}
+          <span className={isDark ? 'text-white' : 'text-slate-900'}>Saravana</span>{' '}
           <span className="gradient-text">Balaji S</span>
         </h1>
 
-        {/* Sub-headline */}
-        <p className="text-slate-400 text-sm sm:text-base font-medium mb-5 animate-fade-in-up delay-100 tracking-wide">
-          Computer Science Engineering Student &nbsp;·&nbsp; Full Stack Developer &nbsp;·&nbsp; AI &amp; Cloud Enthusiast
+        {/* Updated sub-headline */}
+        <p className={`text-sm sm:text-base font-medium mb-5 animate-fade-in-up delay-100 tracking-wide ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+          Aspiring Software Engineer &nbsp;·&nbsp; Full Stack Developer &nbsp;·&nbsp; Data Analytics Enthusiast
         </p>
 
         {/* Achievement tags */}
@@ -66,7 +75,7 @@ export default function Hero() {
             🥇 Top 8 Hackathon Finalist
           </span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 text-xs font-medium">
-            💼 3 Industry Internships
+            💼 4 Industry Internships
           </span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-medium">
             ☁️ AWS & Cloud Learner
@@ -75,15 +84,15 @@ export default function Hero() {
 
         {/* Typewriter */}
         <div className="flex items-center justify-center gap-2 mb-6 min-h-[2.5rem] animate-fade-in-up delay-200">
-          <Terminal size={16} className="text-slate-600 flex-shrink-0" />
-          <p className="text-base sm:text-lg font-medium text-slate-400">
-            <span className="text-slate-300">{displayed}</span>
+          <Terminal size={16} className={isDark ? 'text-slate-600 flex-shrink-0' : 'text-slate-400 flex-shrink-0'} />
+          <p className={`text-base sm:text-lg font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+            <span className={isDark ? 'text-slate-300' : 'text-slate-700'}>{displayed}</span>
             <span className="inline-block w-0.5 h-5 bg-indigo-400 ml-0.5 animate-pulse align-middle" />
           </p>
         </div>
 
         {/* Intro */}
-        <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up delay-300">
+        <p className={`text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up delay-300 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
           Passionate about building practical software solutions, exploring cloud technologies,
           and creating AI-powered applications that solve real-world problems.
         </p>
@@ -99,7 +108,11 @@ export default function Hero() {
           <a
             href="/resume.pdf"
             download
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-white/5 border border-white/12 text-slate-300 font-semibold text-sm hover:bg-white/10 hover:border-white/25 transition-all duration-200 hover:-translate-y-0.5"
+            className={`w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3 rounded-xl border font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 ${
+              isDark
+                ? 'bg-white/5 border-white/12 text-slate-300 hover:bg-white/10 hover:border-white/25'
+                : 'bg-black/5 border-black/12 text-slate-600 hover:bg-black/10 hover:border-black/20'
+            }`}
           >
             <Download size={15} />
             Download Resume
@@ -120,7 +133,11 @@ export default function Hero() {
             { icon: Mail,      href: 'mailto:balajisaravana88@gmail.com', label: 'Email' },
           ].map(({ icon: Icon, href, label }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-              className="p-2.5 rounded-lg glass border border-white/8 text-slate-500 hover:text-white hover:border-indigo-500/40 transition-all duration-200 hover:-translate-y-0.5"
+              className={`p-2.5 rounded-lg glass border transition-all duration-200 hover:-translate-y-0.5 ${
+                isDark
+                  ? 'border-white/8 text-slate-500 hover:text-white hover:border-indigo-500/40'
+                  : 'border-black/8 text-slate-400 hover:text-slate-900 hover:border-indigo-500/40'
+              }`}
             >
               <Icon size={18} />
             </a>
@@ -128,22 +145,24 @@ export default function Hero() {
         </div>
 
         {/* Stats */}
-        <div className="flex items-center justify-center gap-10 pt-8 border-t border-white/5 animate-fade-in-up delay-600">
+        <div className={`flex items-center justify-center gap-10 pt-8 border-t animate-fade-in-up delay-600 ${isDark ? 'border-white/5' : 'border-black/8'}`}>
           {[
-            { value: '3+',  label: 'Internships' },
+            { value: '4+',  label: 'Internships' },
             { value: '5+',  label: 'Projects' },
             { value: 'MLH', label: '2026 Winner' },
           ].map(({ value, label }) => (
             <div key={label} className="text-center">
               <div className="text-2xl sm:text-3xl font-bold gradient-text">{value}</div>
-              <div className="text-xs text-slate-600 mt-0.5">{label}</div>
+              <div className={`text-xs mt-0.5 ${isDark ? 'text-slate-600' : 'text-slate-400'}`}>{label}</div>
             </div>
           ))}
         </div>
       </div>
 
       <button onClick={() => scrollTo('about')} aria-label="Scroll down"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-slate-700 hover:text-slate-400 transition-colors animate-bounce"
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 transition-colors animate-bounce ${
+          isDark ? 'text-slate-700 hover:text-slate-400' : 'text-slate-400 hover:text-slate-600'
+        }`}
       >
         <span className="text-xs tracking-widest uppercase">Scroll</span>
         <ArrowDown size={14} />

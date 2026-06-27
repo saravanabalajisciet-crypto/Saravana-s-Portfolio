@@ -11,10 +11,18 @@ import GitHubStats from './components/GitHubStats'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import { ThemeProvider, useTheme } from './context/ThemeContext'
 
-function App() {
+function AppInner() {
+  const { theme } = useTheme()
   return (
-    <div className="bg-[#0a0a0f] text-slate-200 min-h-screen overflow-x-hidden">
+    <div
+      className={`min-h-screen overflow-x-hidden transition-colors duration-300 ${
+        theme === 'dark'
+          ? 'bg-[#0a0a0f] text-slate-200'
+          : 'bg-[#f4f4f8] text-slate-800'
+      }`}
+    >
       <Navbar />
       <main>
         <Hero />
@@ -31,6 +39,14 @@ function App() {
       </main>
       <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
   )
 }
 
